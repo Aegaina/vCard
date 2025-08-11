@@ -92,35 +92,46 @@ public static class vCardDeserializer
 
     private static IEnumerable<string[]> SplitContent(string vcardContent)
     {
-        using var reader = new StringReader(vcardContent);
-        var response = new List<string>();
-        string? line;
-
-        while ((line = reader.ReadLine()) != null)
+        using (StringReader reader = new StringReader(vcardContent))
         {
-            if (string.IsNullOrWhiteSpace(line))
-                continue;
+            List<string> response = new List<string>();
+            string? line;
 
-            if (line.EqualsIgnoreCase(FieldKeyConstants.EndToken))
+            while ((line = reader.ReadLine()) != null)
             {
-                yield return response.ToArray();
-            }
-            else if (line.EqualsIgnoreCase(FieldKeyConstants.StartToken))
-            {
-                response.Clear();
-            }
-            else if (line.EndsWithIgnoreCase(FieldKeyConstants.StartToken))
-            {
-                var nested = new StringBuilder(line);
+                if (string.IsNullOrWhiteSpace(line))
+                {
+                    continue;
+                }
 
-                while (reader.ReadLine() != null && reader.ReadLine().Trim() is { } nestedLine && !nestedLine.EqualsIgnoreCase(FieldKeyConstants.EndToken))
-                    nested.AppendLine(nestedLine);
+                if (line.EqualsIgnoreCase(FieldKeyConstants.EndToken))
+                {
+                    yield return response.ToArray();
+                }
+                else if (line.EqualsIgnoreCase(FieldKeyConstants.StartToken))
+                {
+                    response.Clear();
+                }
+                else if (line.EndsWithIgnoreCase(FieldKeyConstants.StartToken))
+                {
+                    var nested = new StringBuilder(line);
 
-                response.Add(nested.ToString());
-            }
-            else
-            {
-                response.Add(line);
+                    while (reader.ReadLine() != null && reader.ReadLine().Trim() is { } nestedLine && !nestedLine.EqualsIgnoreCase(FieldKeyConstants.EndToken))
+                        nested.AppendLine(nestedLine);
+
+                    response.Add(nested.ToString());
+                }
+                else
+                {
+                    if (line.StartsWith(' ') && response.Count >= 1)
+                    {
+                        response[response.Count - 1] = string.Concat(response[response.Count - 1], line.TrimStart());
+                    }
+                    else
+                    {
+                        response.Add(line);
+                    }
+                }
             }
         }
     }
@@ -297,9 +308,9 @@ public static class vCardDeserializer
                 out var rawUid, out var uidDes))
             vcard.Uid = uidDes!.Read(rawUid!);
 
-        if (vcardContent.TryGetDeserializationParams<IV3FieldDeserializer<string>>(UrlFieldDeserializer.FieldKey,
+        if (vcardContent.TryGetDeserializationParams<IV3FieldDeserializer<Url>>(UrlFieldDeserializer.FieldKey,
                 out var rawUrl, out var urlDes))
-            vcard.Url = urlDes!.Read(rawUrl!);
+            vcard.Url = urlDes!.Read(rawUrl!).Value;
 
         if (vcardContent.TryGetDeserializationParams<IV3FieldDeserializer<string>>(TimezoneFieldDeserializer.FieldKey,
                 out var rawTz, out var tzDes))

@@ -1,4 +1,5 @@
 ﻿using vCardLib.Constants;
+using vCardLib.Extensions;
 
 namespace vCardLib.Deserialization.Utilities;
 
@@ -10,11 +11,18 @@ internal static class DataSplitHelpers
             .TrimStart(FieldKeyConstants.SectionDelimiter)
             .TrimStart(FieldKeyConstants.MetadataDelimiter);
 
-        var index = input.IndexOf(FieldKeyConstants.SectionDelimiter);
-        var metadata = input.Substring(0, index < 0 ? 0 : index);
-        var value = input.Substring(index + 1);
+        if (!string.IsNullOrWhiteSpace(input) && (input.StartsWithIgnoreCase("http:") || input.StartsWithIgnoreCase("https:")))
+        {
+            return (new string[] { }, input);
+        }
+        else
+        {
+            var index = input.IndexOf(FieldKeyConstants.SectionDelimiter);
+            var metadata = input.Substring(0, index < 0 ? 0 : index);
+            var value = input.Substring(index + 1);
 
-        return (metadata.Split(FieldKeyConstants.MetadataDelimiter), value);
+            return (metadata.Split(FieldKeyConstants.MetadataDelimiter), value);
+        }
     }
 
     public static (string, string?) SplitDatum(string datum, char metadataSeparator)

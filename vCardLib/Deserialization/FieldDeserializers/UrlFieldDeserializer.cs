@@ -30,8 +30,11 @@ internal sealed class UrlFieldDeserializer : IV2FieldDeserializer<Url>, IV3Field
 
             if (key is null || key.EqualsIgnoreCase(FieldKeyConstants.TypeKey))
             {
-                var parsedType = EnumExtensions.Parse<UrlType>(data);
-                type = type is null ? parsedType : type | parsedType;
+                if (!data.EqualsIgnoreCase("PREF"))
+                {
+                    var parsedType = EnumExtensions.Parse<UrlType>(data);
+                    type = type is null ? parsedType : type | parsedType;
+                }
             }
             else if (key.EqualsIgnoreCase(FieldKeyConstants.LabelKey))
                 label = StringHelpers.IsQuoted(data) ? data.Trim().Trim('"') : data;

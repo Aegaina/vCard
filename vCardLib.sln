@@ -1,10 +1,13 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-VisualStudioVersion = 14.0.23107.0
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36221.1 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vCardLib", "vCardLib\vCardLib.csproj", "{1C234BC6-282E-455F-A46F-A472575DAECE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vCardLib.Tests", "vCardLib.Tests\vCardLib.Tests.csproj", "{34B428BD-CF5B-4034-AC3A-36CEB98B7306}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vCardLib.UnitTests", "vCardLib.UnitTests\vCardLib.UnitTests.csproj", "{A9D82559-C75F-42D3-8393-67BEF5F1F75A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,14 +23,18 @@ Global
 		{34B428BD-CF5B-4034-AC3A-36CEB98B7306}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34B428BD-CF5B-4034-AC3A-36CEB98B7306}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34B428BD-CF5B-4034-AC3A-36CEB98B7306}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9D82559-C75F-42D3-8393-67BEF5F1F75A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9D82559-C75F-42D3-8393-67BEF5F1F75A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9D82559-C75F-42D3-8393-67BEF5F1F75A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9D82559-C75F-42D3-8393-67BEF5F1F75A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
 		$0.DotNetNamingPolicy = $1
 		$1.DirectoryNamespaceAssociation = None
 		$1.ResourceNamePolicy = FileFormatDefault
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
