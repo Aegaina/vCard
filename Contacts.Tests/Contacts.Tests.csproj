@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Contacts.Core\Contacts.Core.csproj" />
     <ProjectReference Include="..\vCardLib\vCardLib.csproj" />
   </ItemGroup>
 

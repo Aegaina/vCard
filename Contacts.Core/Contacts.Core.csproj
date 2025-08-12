@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>Aegaina.$(MSBuildProjectName)</AssemblyName>
+    <RootNamespace>Aegaina.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+    <Authors>Cathy Zhou</Authors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aegaina.Common" Version="4.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\vCardLib\vCardLib.csproj" />
+  </ItemGroup>
+
+</Project>

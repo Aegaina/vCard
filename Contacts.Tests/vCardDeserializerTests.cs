@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using vCardLib.Deserialization;
 using System;
 using System.Collections.Generic;
 using System.Text;
